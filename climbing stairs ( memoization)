@@ -1,0 +1,28 @@
+import java.util.HashMap;
+import java.util.Map;
+
+public class ClimbingStairs {
+    public static int climbStairs(int n) {
+        Map<Integer, Integer> memo = new HashMap<>();
+        return climbStairsHelper(n, memo);
+    }
+
+    private static int climbStairsHelper(int n, Map<Integer, Integer> memo) {
+        if (n <= 2)
+            return n;
+        
+        if (memo.containsKey(n))
+            return memo.get(n);
+        
+        int ways = climbStairsHelper(n - 1, memo) + climbStairsHelper(n - 2, memo);
+        memo.put(n, ways);
+        
+        return ways;
+    }
+
+    public static void main(String[] args) {
+        int n = 5;
+        int ways = climbStairs(n);
+        System.out.println("Number of ways to climb " + n + " stairs: " + ways);
+    }
+}
